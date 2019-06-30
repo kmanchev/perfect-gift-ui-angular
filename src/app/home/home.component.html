@@ -1,7 +1,7 @@
 <div class="user-event-info">
     <div class="event-buttons">
-        <button class="button">Show Events</button>
-        <button class="button">Create Event</button>
+        <button class="button" (click)="toggleShowEvents()">Show Events</button>
+        <button class="button" (click)="createEvent()">Create Event</button>
     </div>
     <!-- <ul>
         <li *ngFor="let event of events">
@@ -10,3 +10,7 @@
         </li>
     </ul> -->
 </div>
+<div class="event-component">
+        <app-events></app-events>
+        <!-- <event-create></event-create> -->
+    </div>

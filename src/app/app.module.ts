@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { routing } from './app.routing';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AlertComponent } from './alert/alert.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
@@ -19,7 +19,7 @@ import { EventComponent } from './event/event.component';
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        routing
+        AppRoutingModule
     ],
     declarations: [
         AppComponent,

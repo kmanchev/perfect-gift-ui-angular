@@ -3,29 +3,30 @@ import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { User } from '../_models/user';
-import { Event } from '../_models/event';
+
 import { AuthenticationService } from '../_services/authentication.service';
 import { UserService } from '../_services/user.service';
+import { MessageService } from '../_services/message.service';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit, OnDestroy {
   currentUser: User;
-  currentEvent: Event;
   currentUserSubscription: Subscription;
   users: User[] = [];
-  events: Event[] = [];
+  shouldShowEvents: boolean;
 
   constructor(
+    private messageService: MessageService,
     private authenticationService: AuthenticationService,
     private userService: UserService
   ) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
     });
+    this.shouldShowEvents = false;
   }
 
   ngOnInit() {
-    this.loadAllUserEvents();
   }
 
   ngOnDestroy() {
@@ -33,33 +34,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.currentUserSubscription.unsubscribe();
   }
 
-  //TODO: To remove
-  deleteUser(id: number) {
-    this.userService.delete(id).pipe(first()).subscribe(() => {
-      this.loadAllUsers()
-    });
+  toggleShowEvents() {
+    console.log("from toggle");
+    if (this.shouldShowEvents) {
+      console.log("hiding events");
+      this.messageService.sendMessage('hide events');
+      this.shouldShowEvents = false;
+    } else {
+      console.log("show events");
+      this.messageService.sendMessage('show events');
+      this.shouldShowEvents = true;
+    }
+    
   }
 
-  //TODO: To implement
-  deleteEvent(id: number) {
-    this.userService.deleteEvent(id).pipe(first()).subscribe(() => {
-      this.loadAllUserEvents()
-    });
-  }
-
-
-  //TODO: To remove 
-  private loadAllUsers() {
-    this.userService.getAll().pipe(first()).subscribe(users => {
-      this.users = users;
-    });
-  }
-
-  //TODO: To implement
-  private loadAllUserEvents() {
-    this.userService.getAllEvents().pipe(first()).subscribe(events => {
-      this.events = events;
-    });
+  createEvent() {
+    console.log("create event")
   }
 
 }
