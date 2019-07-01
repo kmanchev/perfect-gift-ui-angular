@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { UserService } from '../_services/user.service'
+import { AlertService } from '../_services/alert.services';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-event-create',
@@ -14,7 +18,9 @@ export class EventCreateComponent implements OnInit {
   returnUrl: string;
 
   constructor(
+    private userService: UserService,
     private formBuilder: FormBuilder,
+    private alertService: AlertService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
@@ -36,12 +42,29 @@ export class EventCreateComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.eventForm.invalid) {
+      console.log("are invalid ?");
       return;
     }
 
     this.loading = true;
 
-    //call to backend to save an event
+    const headers = new HttpHeaders()
+    .set("Content-Type", "application/json");
+
+    this.userService.createEvent(JSON.stringify({
+      eventName: this.f.eventName.value,
+      eventType: this.f.eventType.value
+    }), headers)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          console.log("from error??");
+          this.alertService.error(error);
+          this.loading = false;
+        });
     this.loading = false;
   }
 

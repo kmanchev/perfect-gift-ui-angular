@@ -35,4 +35,8 @@ export class UserService {
     deleteEvent(id: number) {
         return this.http.delete(`http://localhost:4000/users/deleteEvent/${id}`);
     }
+
+    createEvent(body: String, headers) {
+        return this.http.post(`http://localhost:4000/users/createEvent`, body, {headers});
+    }
 }
