@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EventComponent } from './event/event.component';
 import { EventCreateComponent } from './event-create/event-create.component';
+import { InviteUserComponent } from './invite-user/invite-user.component';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { EventCreateComponent } from './event-create/event-create.component';
         LoginComponent,
         RegisterComponent,
         EventComponent,
-        EventCreateComponent
+        EventCreateComponent,
+        InviteUserComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

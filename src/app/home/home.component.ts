@@ -31,18 +31,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
     this.currentUserSubscription.unsubscribe();
   }
 
   toggleShowEvents() {
-    console.log("from toggle");
     if (this.shouldShowEvents) {
-      console.log("hiding events");
       this.messageService.sendMessage('hide events');
       this.shouldShowEvents = false;
     } else {
-      console.log("show events");
       this.messageService.sendMessage('show events');
       this.shouldShowEvents = true;
     }
@@ -50,7 +46,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   createEvent = function () {
-    console.log("create event")
     this.router.navigateByUrl('/createEvent');
 };
 

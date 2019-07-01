@@ -3,6 +3,7 @@ import { UserService } from '../_services/user.service';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { MessageService } from '../_services/message.service';
+import { Router } from '@angular/router';
 import { Event } from '../_models/event';
 
 @Component({
@@ -15,6 +16,7 @@ export class EventComponent implements OnInit, OnDestroy {
   events: Event[] = [];
 
   constructor(
+    private router: Router,
     private userService: UserService,
     private messageService: MessageService) {
     this.subscription = this.messageService.getMessage().subscribe(message => {
@@ -55,5 +57,9 @@ export class EventComponent implements OnInit, OnDestroy {
       this.loadAllUserEvents()
     });
   }
+
+  inviteUser = function () {
+    this.router.navigateByUrl('/inviteUser');
+  };
 
 }
