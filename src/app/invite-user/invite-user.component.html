@@ -1,1 +1,7 @@
-<p>invite-user works!</p>
+
+<div style="font-size: 40px; font-style: italic;" class="event-name">{{eventName}}</div>
+
+Email of User to Invite
+<input (keyup)="onKey($event)">
+<button (click)="sendInvite()">send Invite</button>
+<a routerLink="/" class="btn btn-link">Return to home</a>

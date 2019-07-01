@@ -39,4 +39,8 @@ export class UserService {
     createEvent(body: String, headers) {
         return this.http.post(`http://localhost:4000/users/createEvent`, body, {headers});
     }
+
+    inviteUserForEvent(body: String, headers) {
+        return this.http.post(`http://localhost:4000/users/invite`, body, {headers});
+    }
 }
