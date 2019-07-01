@@ -45,6 +45,7 @@ export class EventComponent implements OnInit, OnDestroy {
 
   private loadAllUserEvents() {
     this.userService.getAllEvents().pipe(first()).subscribe(events => {
+      console.log(events);
       this.events = events;
     });
   }

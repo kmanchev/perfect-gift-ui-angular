@@ -1,6 +1,16 @@
-<ul *ngIf="events.length > 0">
-    <!-- <li *ngFor="let event of events">
-        <p>{{event.eventName}} {{event.eventType}}</p>
-    </li> -->
-    {{events}}
-</ul>
+<div class="app-events" *ngIf="events.length > 0">
+    <ul>
+        <table style="width:100%">
+            <tr>
+                <th>Event Name</th>
+                <th>Event Type</th>
+
+            </tr>
+            <tr *ngFor="let event of events">
+                <td>{{event.eventName}}</td>
+                <td>{{event.eventType}}</td>
+                <th><button>Edit</button></th>
+            </tr>
+        </table>
+    </ul>
+</div>
