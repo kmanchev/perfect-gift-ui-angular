@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 import { User } from '../_models/user';
 
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   shouldShowEvents: boolean;
 
   constructor(
+    private router: Router,
     private messageService: MessageService,
     private authenticationService: AuthenticationService,
     private userService: UserService
@@ -48,8 +49,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     
   }
 
-  createEvent() {
+  createEvent = function () {
     console.log("create event")
-  }
+    this.router.navigateByUrl('/createEvent');
+};
 
 }
